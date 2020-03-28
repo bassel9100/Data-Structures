@@ -1,1 +1,1 @@
-Most familiar sorting algorithms.
+Most familiar and known data-structures!
