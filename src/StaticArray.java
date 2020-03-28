@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class StaticArray <T> implements Iterable<T> {
+public class StaticArray<T> implements Iterable<T> {
 
     private T[] arr;
     private int n = 0; // The length user thinks the array is

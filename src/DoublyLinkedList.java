@@ -1,15 +1,15 @@
 import java.util.Iterator;
 
-public class DoublyLinkedList <T> implements Iterable<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
 
     private int size = 0;
-    private Node <T> head = null; // Empty at beginning
-    private Node <T> tail = null;
+    private Node<T> head = null; // Empty at beginning
+    private Node<T> tail = null;
 
-    // Inside class to represent a Node
-    private class Node <T> {
+    // Inner class to represent a Node
+    private class Node<T> {
         T x;
-        Node <T> prev, next;
+        Node<T> prev, next;
         public Node(T x, Node <T> next, Node<T> prev){
             this.x = x;
             this.next = next;
