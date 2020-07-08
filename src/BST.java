@@ -27,46 +27,46 @@ public class BST <T extends Comparable<T>>{
     return count;
   }
 
-  public boolean add(T element){
-    if(contains(element)){  // If inserted element is already in the tree ignore it
+  public boolean add(T elementent){
+    if(contains(elementent)){  // If inserted elementent is already in the tree ignore it
       return false;
     } else {
-      add(root, element); // Add the element to the tree and increase the count
+      add(root, elementent); // Add the elementent to the tree and increase the count
       count++;
       return true;
     }
   }
 
-  public Node add(Node node, T element){ // Recursively insert an element to the tree
+  public Node add(Node node, T elementent){ // Recursively insert an elementent to the tree
     if (node == null) { // If the node is a leaf node
-      node = new Node(null, null, element);
+      node = new Node(null, null, elementent);
     } else {
-      if (element.compareTo(node.data) < 0) {  // Pick a subtree to insert element
-        node.left = add(node.left, element);
+      if (elementent.compareTo(node.data) < 0) {  // Pick a subtree to insert elementent
+        node.left = add(node.left, elementent);
       } else {
-        node.right = add(node.right, element);
+        node.right = add(node.right, elementent);
       }
     }
     return node;
   }
 
-  public boolean remove(T element) {   // Remove an element from the tree if it exists O(n) time complexity
-    if (contains(element)){
-      root = remove(root, elem);
+  public boolean remove(T elementent) {   // Remove an elementent from the tree if it exists O(n) time complexity
+    if (contains(elementent)){
+      root = remove(root, element);
       count--;
       return true;
     }
     return false;
   }
 
-  private Node remove(Node node, T elem) {
+  private Node remove(Node node, T element) {
     if(node == null) return null;
-    int temp = elem.compareTo(node.data);
-    if (temp < 0) { // Check left subtree becuase the element is smaller than the current element
-      node.left = remove(node.left, elem);
-    } else if (temp > 0) { // Check right subtree becuase the element is larger than the current element
-      node.right = remove(node.right, elem);
-    } else { // Found the element
+    int temp = element.compareTo(node.data);
+    if (temp < 0) { // Check left subtree becuase the elementent is smaller than the current elementent
+      node.left = remove(node.left, element);
+    } else if (temp > 0) { // Check right subtree becuase the elementent is larger than the current elementent
+      node.right = remove(node.right, element);
+    } else { // Found the elementent
 
       if (node.left == null) {          // Case with only a right subtree or no subtree
         Node rightChild = node.right;   // In that case, swap the node that is going to be removed with its right child
@@ -80,15 +80,46 @@ public class BST <T extends Comparable<T>>{
         node = null;
         return leftChild;
 
-      } else {  // Find the smallest element in the right subtree
+      } else {  // Find the smallest elementent in the right subtree
         Node tmp = findMin(node.right); // Find the leftmost node in the right subtree
         node.data = tmp.data; // Swap data
         node.right = remove(node.right, tmp.data);
+      }
     }
+    return node;
   }
-  return node;
-}
 
+  private Node findMin(Node node) { // Find the leftmost node with smallest value "Helper method"
+    while (node.left != null)
+      node = node.left;
+    return node;
+  }
 
+  private Node findMax(Node node) { // Find the rightmost node with largest value "Helper method"
+    while (node.right != null)
+      node = node.right;
+    return node;
+  }
 
+  public boolean contains(T element) {
+    return contains(root, element);
+  }
+
+  private boolean contains(Node node, T element) { // Find elementent in the tree
+    if (node == null) return false; // Element not found
+    int temp = element.compareTo(node.data);
+    if (temp < 0) return contains(node.left, element);
+    else if (temp > 0) return contains(node.right, element);
+    else return true; // Found the element
+  }
+
+  public int height() { // Calculates and returns the height of the tree
+    return height(root);
+  }
+
+  private int height(Node node) { // Recursive method that calculates the height of the tree
+    if (node == null) return 0;
+    return Math.max(height(node.left), height(node.right)) + 1;
+  }
+  
 }
