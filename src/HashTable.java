@@ -23,7 +23,7 @@ public class HashTable {
         for(int i = 0; i < fromArr.length; i++){
             String newElement = fromArray[i];
             int index = Integer.parseInt(newElement) % 99; // Create an index 2 store value by taking the modulus
-            while(toArr[index] != "null") {
+            while(toArr[index] != "null") { // Use linear probing if position is occupied to avvoid collison
                 ++index;
                 index %= size;
             }
